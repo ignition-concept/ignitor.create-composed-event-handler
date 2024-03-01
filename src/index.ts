@@ -2,7 +2,14 @@ import type { SyntheticEvent, EventHandler } from "react";
 
 export type MessageType = "info" | "log" | "warn" | "error";
 
-export type MessageAction = [MessageType, string] | (() => void);
+export type NextLogger = [MessageType, string];
+
+export type NextAction = () =>
+  | void
+  | Promise<void>
+  | (() => void | Promise<void>);
+
+export type NextArguments = NextLogger | NextAction;
 
 export interface EventHandlerComposed<
   T extends Element = Element,
@@ -12,7 +19,10 @@ export interface EventHandlerComposed<
    * @param next can only using once
    * @param event an react synthetic event
    */
-  (event: SyntheticEvent<T, E>, next: (message?: MessageAction) => void): void;
+  (
+    event: SyntheticEvent<T, E>,
+    next: (message?: NextArguments) => void
+  ): Promise<void> | void;
 }
 
 /**
@@ -39,14 +49,18 @@ export function createComposedEventHandler<
 >(...handlers: EventHandlerComposed<T, E>[]) {
   let i = 0;
   const track = new Map<string, boolean>();
-  function handle(event: SyntheticEvent<T, E>) {
+  async function handle(event: SyntheticEvent<T, E>) {
     if (i < handlers.length) {
       const handler = handlers[i];
 
-      handler(event, (message?: MessageAction) => {
+      handler(event, async (message?: NextArguments) => {
         if (typeof track.get(`event-${i}`) === "undefined") {
           if (typeof message === "function") {
-            message();
+            const cleanup = await message();
+
+            if (cleanup) {
+              await cleanup();
+            }
           }
           if (Array.isArray(message) && message[0] === "info") {
             console.info(message[1]);
@@ -61,16 +75,16 @@ export function createComposedEventHandler<
             console.error(message[1]);
           }
           i++;
-          handle?.(event);
-          track.set(`event-${i}`, true);
+          await Promise.resolve(handle?.(event));
+          await Promise.resolve(track.set(`event-${i}`, true));
           return;
         }
       });
     }
   }
 
-  return (event: SyntheticEvent<T, E>) => {
-    handle(event);
+  return async (event: SyntheticEvent<T, E>) => {
+    await handle(event);
   };
 }
 
@@ -86,9 +100,9 @@ export const eventProps = <
 >(
   item: I | undefined
 ): EventHandlerComposed<T, E> => {
-  return (
+  return async (
     event: SyntheticEvent<T, E>,
-    _next: (message?: MessageAction) => void
+    _next: (message?: NextArguments) => void
   ) => {
     item?.(event);
   };
