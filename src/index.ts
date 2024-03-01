@@ -7,6 +7,7 @@ export type NextLogger = [MessageType, string];
 export type NextAction = () =>
   | void
   | Promise<void>
+  | Promise<(() => void | Promise<void>)>
   | (() => void | Promise<void>);
 
 export type NextArguments = NextLogger | NextAction;
@@ -56,7 +57,7 @@ export function createComposedEventHandler<
       handler(event, async (message?: NextArguments) => {
         if (typeof track.get(`event-${i}`) === "undefined") {
           if (typeof message === "function") {
-            const cleanup = await message();
+            const cleanup = await Promise.resolve(message());
 
             if (cleanup) {
               await cleanup();

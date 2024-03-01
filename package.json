@@ -1,13 +1,13 @@
 {
   "name": "ignitor.create-composed-event-handler",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "type": "module",
   "description": "an event utils for combine react event",
   "scripts": {
     "test": "vitest",
     "dev": "tsup --watch",
     "build": "tsup",
-    "prepublish": "npm run build"
+    "prepublish": "npm run test && npm run build"
   },
   "files": [
     "dist",
