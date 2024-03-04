@@ -4,19 +4,19 @@
 
 ```bash
 # for npm
-npm i ignitor.create-composed-event-handler
+npm i @ignition-concept/create-composed-event-handler
 
 # for yarn
-yarn add ignitor.create-composed-event-handler
+yarn add @ignition-concept/create-composed-event-handler
 
 # for pnpm
-pnpm install ignitor.create-composed-event-handler
+pnpm install @ignition-concept/create-composed-event-handler
 ```
 
 ## Usage
 
 ```tsx
-import { createComposedEventHandler } from "ignitor.create-composed-event-handler";
+import { createComposedEventHandler } from "@ignition-concept/create-composed-event-handler";
 
 export default function MyButtonNeedMultipleFunctionHandler() {
   return (

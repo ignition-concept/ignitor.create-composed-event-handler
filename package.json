@@ -1,5 +1,5 @@
 {
-  "name": "ignitor.create-composed-event-handler",
+  "name": "@ignition-concept/create-composed-event-handler",
   "version": "0.3.2",
   "type": "module",
   "description": "an event utils for combine react event",
@@ -11,9 +11,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ignitorscript/ignitor.create-composed-event-handler.git"
+    "url": "https://github.com/ignition-concept/create-composed-event-handler.git"
   },
-  "homepage": "https://github.com/ignitorscript/ignitor.create-composed-event-handler",
+  "homepage": "https://github.com/ignition-concept/create-composed-event-handler",
   "files": [
     "dist",
     "package.json",
