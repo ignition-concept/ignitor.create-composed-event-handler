@@ -2,7 +2,7 @@
   "name": "@ignition-concept/create-composed-event-handler",
   "version": "0.3.2",
   "type": "module",
-  "description": "an event utils for combine react event",
+  "description": "an event utils for combine react event (move from 'ignitor.create-composed-event-handler')",
   "scripts": {
     "test": "vitest",
     "dev": "tsup --watch",
