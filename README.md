@@ -29,6 +29,17 @@ export default function MyButtonNeedMultipleFunctionHandler() {
           // next(["warn", "hello am i too loud?"]);
           // next(["info", "hello am i too loud?"]);
           // next(["error", "hello am i too loud?"]);
+          /**
+           * just an experimantal using at your own risk
+           *
+           * next(async () => {
+           *  const cleanup = await doingSomeTasks()
+           *
+           *    return async () => {
+           *       await cleanup()
+           *    }
+           * })
+           */
         },
         (event) => {
           console.log(event.target.tagName);
