@@ -30,13 +30,18 @@ export default function MyButtonNeedMultipleFunctionHandler() {
           // next(["info", "hello am i too loud?"]);
           // next(["error", "hello am i too loud?"]);
           /**
-           * just an experimantal using at your own risk
-           *
            * next(async () => {
-           *  const cleanup = await doingSomeTasks()
+           *  const waitFor = 400
+           *  const timer = setInterval(() => {
+           *     doingSomeTask()
+           *  }, waitFor)
            *
-           *    return async () => {
-           *       await cleanup()
+           *    return async (wait) => {
+           *      wait(waitFor+100) // just add more 100ms
+           *
+           *      clearInterval(timer)
+           *
+           *      console.log('timer clear')
            *    }
            * })
            */

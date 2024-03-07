@@ -1,14 +1,22 @@
 import type { SyntheticEvent, EventHandler } from "react";
 
+const increase = (index: number) => index++;
+
+export const delay = (milisecond: number = Infinity) => {
+  return new Promise((resolve) => setTimeout(resolve, milisecond));
+};
+
 export type MessageType = "info" | "log" | "warn" | "error";
 
 export type NextLogger = [MessageType, string];
 
-export type NextAction = () =>
+export type NextAction = (
+  wait: typeof delay
+) =>
   | void
   | Promise<void>
-  | Promise<(() => void | Promise<void>)>
-  | (() => void | Promise<void>);
+  | Promise<(wait: typeof delay) => void | Promise<void>>
+  | ((wait: typeof delay) => void | Promise<void>);
 
 export type NextArguments = NextLogger | NextAction;
 
@@ -57,25 +65,25 @@ export function createComposedEventHandler<
       handler(event, async (message?: NextArguments) => {
         if (typeof track.get(`event-${i}`) === "undefined") {
           if (typeof message === "function") {
-            const cleanup = await Promise.resolve(message());
+            const cleanup = await Promise.resolve(message(delay));
 
             if (cleanup) {
-              await cleanup();
+              await cleanup(delay);
             }
           }
           if (Array.isArray(message) && message[0] === "info") {
-            console.info(message[1]);
+            await Promise.resolve(console.info(message[1]));
           }
           if (Array.isArray(message) && message[0] === "log") {
-            console.log(message[1]);
+            await Promise.resolve(console.log(message[1]));
           }
           if (Array.isArray(message) && message[0] === "warn") {
-            console.warn(message[1]);
+            await Promise.resolve(console.warn(message[1]));
           }
           if (Array.isArray(message) && message[0] === "error") {
-            console.error(message[1]);
+            await Promise.resolve(console.error(message[1]));
           }
-          i++;
+          await Promise.resolve(increase(i));
           await Promise.resolve(handle?.(event));
           await Promise.resolve(track.set(`event-${i}`, true));
           return;
