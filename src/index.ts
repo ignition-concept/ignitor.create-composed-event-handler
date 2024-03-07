@@ -2,7 +2,7 @@ import type { SyntheticEvent, EventHandler } from "react";
 
 const increase = (index: number) => index++;
 
-const delay = (milisecond: number = Infinity) => {
+export const delay = (milisecond: number = Infinity) => {
   return new Promise((resolve) => setTimeout(resolve, milisecond));
 };
 
