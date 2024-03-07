@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, act } from "@testing-library/react";
 import {
   CounterSingleUsage,
   CounterMultiUsageWithNext,
@@ -22,11 +22,11 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
   });
@@ -38,11 +38,11 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
   });
@@ -54,12 +54,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).not.toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).not.toBeCalled();
@@ -72,12 +72,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).not.toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).not.toBeCalled();
@@ -90,12 +90,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).toBeCalled();
@@ -108,12 +108,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).toBeCalled();
@@ -126,12 +126,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).toBeCalled();
@@ -144,12 +144,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).toBeCalled();
@@ -162,12 +162,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).toBeCalled();
@@ -180,12 +180,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).toBeCalled();
@@ -198,12 +198,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).toBeCalled();
@@ -216,12 +216,12 @@ describe("test: `createComposedEventHandler` it should works", (it) => {
     const increment = await screen.findByTestId("increment");
     const decrement = await screen.findByTestId("decrement");
 
-    fireEvent.click(increment);
+    act(() => fireEvent.click(increment));
 
     expect(display.textContent).toBe(String(1));
     expect($console).toBeCalled();
 
-    fireEvent.click(decrement);
+    act(() => fireEvent.click(decrement));
 
     expect(display.textContent).toBe(String(0));
     expect($console).toBeCalled();

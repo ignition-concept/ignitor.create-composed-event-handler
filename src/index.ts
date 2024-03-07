@@ -1,7 +1,5 @@
 import type { SyntheticEvent, EventHandler } from "react";
 
-const increase = (index: number) => index++;
-
 export const delay = (milisecond: number = Infinity) => {
   return new Promise((resolve) => setTimeout(resolve, milisecond));
 };
@@ -83,7 +81,7 @@ export function createComposedEventHandler<
           if (Array.isArray(message) && message[0] === "error") {
             await Promise.resolve(console.error(message[1]));
           }
-          await Promise.resolve(increase(i));
+          i++;
           await Promise.resolve(handle?.(event));
           await Promise.resolve(track.set(`event-${i}`, true));
           return;
